@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'editDeckPage.dart';
+import 'searchResults.dart';
 
 // ---------------- MAIN WIDGET ----------------
 
@@ -48,6 +49,8 @@ class _VocabState extends State<Vocab> {
   late final TextEditingController titleController = TextEditingController();
   /// descriptionController is the TextEditingController for the TextField for the description when the user is creating a new deck.
   late final TextEditingController descriptionController = TextEditingController();
+  /// searchController is the TextEditingController for the search bar.
+  late final TextEditingController searchController = TextEditingController();
 
   /// This runs once when the program starts.
   /// Currently I don't run anything, but I added this just in case I need it moving forward.
@@ -66,6 +69,39 @@ class _VocabState extends State<Vocab> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("Vocab"),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    hintText: "Search"
+                  ),
+                )
+              ),
+              IconButton(
+                onPressed: () {
+                  final searchInput = searchController.text;
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchResults(
+                        searchInput: searchInput,
+                        decks: decks,
+                        deckNames: deckNames,
+                        myDictionary: decks["My Dictionary"],
+                      )
+                    )
+                  );
+                },
+                icon: Icon(Icons.search_rounded)
+              )
+            ],
+          )
+        )
       ),
 
       // This FloatingActionButton makes the big button at the bottom right of the page.
@@ -317,5 +353,13 @@ class _VocabState extends State<Vocab> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 }
