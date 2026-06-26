@@ -245,7 +245,18 @@ class _SearchResultsState extends State<SearchResults> {
       }
     }
 
-    if(widget.myDictionary["vocab"].contains(searchInput)) {
+    // FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS FIX THIS
+    // Then add comments after
+    var isSearchFound = false;
+    for(var i = 0; i < widget.myDictionary.length; i++) {
+      if(widget.myDictionary[i].contains(searchInput)) {
+        isSearchFound = true;
+
+        break;
+      }
+    }
+
+    if(isSearchFound) {
       results["My Dictionary"] = true;
       results["length"]++;
 
