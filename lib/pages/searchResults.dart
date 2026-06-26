@@ -183,7 +183,7 @@ class _SearchResultsState extends State<SearchResults> {
                                         Positioned.fill(
                                           child: InkWell(
                                             onTap: () {
-                                              final String targetDeckName = searchData(widget.searchInput)["vocab"][index - (searchData(widget.searchInput)["decks"].length)][0].toString();
+                                              final String targetDeckName = searchData(widget.searchInput)["vocab"][index - (searchData(widget.searchInput)["decks"].length) - 1][0].toString();
                                                 
                                               // Go to the page that shows all the vocab in this deck.
                                               Navigator.push(
@@ -210,7 +210,7 @@ class _SearchResultsState extends State<SearchResults> {
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Text('"' + widget.searchInput.toString() + '"' + ' was found in deck ' + '"' + searchData(widget.searchInput)["vocab"][index - (searchData(widget.searchInput)["decks"].length + 1)][0].toString() + '"')
+                                                Text('"' + widget.searchInput.toString() + '"' + ' was found in deck ' + '"' + searchData(widget.searchInput)["vocab"][index - (searchData(widget.searchInput)["decks"].length) - 1][0].toString() + '"')
                                               ],
                                             )
                                           ),
@@ -255,7 +255,7 @@ class _SearchResultsState extends State<SearchResults> {
     // Then add comments after
     var isSearchFound = false;
     for(var i = 0; i < widget.myDictionary.length; i++) {
-      if(widget.myDictionary[i].contains(searchInput)) {
+      if(widget.myDictionary["vocab"][i].contains(searchInput)) {
         isSearchFound = true;
 
         break;
@@ -267,7 +267,7 @@ class _SearchResultsState extends State<SearchResults> {
       results["length"]++;
 
       Map deck;
-      for(var i = 0; i < widget.deckNames.length; i++) {
+      for(var i = 1; i < widget.deckNames.length; i++) {
         deck = widget.decks[widget.deckNames[i]];
 
         for(var j = 0; j < deck["vocab"].length; j++) {
