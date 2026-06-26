@@ -68,7 +68,9 @@ class _SearchResultsState extends State<SearchResults> {
                                               builder: (context) => EditDeckPage(
                                                 // Gives the page the data to show.
                                                 deckName: searchData(widget.searchInput)["decks"][index],
+                                                deckNames: widget.deckNames,
                                                 deck: widget.decks[searchData(widget.searchInput)["decks"][index]],
+                                                decks: widget.decks,
                                                 myDictionary: widget.myDictionary
                                               )
                                             )
@@ -134,7 +136,9 @@ class _SearchResultsState extends State<SearchResults> {
                                                   builder: (context) => EditDeckPage(
                                                     // Gives the page the data to show.
                                                     deckName: "My Dictionary",
+                                                    deckNames: widget.deckNames,
                                                     deck: widget.decks["My Dictionary"],
+                                                    decks: widget.decks,
                                                     myDictionary: widget.myDictionary
                                                   )
                                                 )
@@ -188,7 +192,9 @@ class _SearchResultsState extends State<SearchResults> {
                                                   builder: (context) => EditDeckPage(
                                                     // Gives the page the data to show.
                                                     deckName: targetDeckName,
+                                                    deckNames: widget.deckNames,
                                                     deck: widget.decks[targetDeckName],
+                                                    decks: widget.decks,
                                                     myDictionary: widget.myDictionary
                                                   )
                                                 )

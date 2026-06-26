@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'searchResults.dart';
 
 // ---------------- MAIN WIDGET ----------------
 
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 /// The widgets will be stateful widgets.
 class EditDeckPage extends StatefulWidget {
   final String deckName;
+  final List deckNames;
   final Map deck;
+  final Map decks;
   final Map myDictionary;
 
   /// This tells the page what information to fetch from the other page.
@@ -17,7 +20,9 @@ class EditDeckPage extends StatefulWidget {
   const EditDeckPage({
     super.key,
     required this.deckName,
+    required this.deckNames,
     required this.deck,
+    required this.decks,
     required this.myDictionary
   });
 
@@ -35,8 +40,10 @@ class _EditDeckPageState extends State<EditDeckPage> {
   late final TextEditingController character = TextEditingController();
   /// This TextEditingController stores information for the pinyin (pronounciation) TextField when the user adds new vocab.
   late final TextEditingController pinyin = TextEditingController();
-  /// This TextEditingController stored information for the meaning TextField when the user adds new vocab.
+  /// This TextEditingController stores information for the meaning TextField when the user adds new vocab.
   late final TextEditingController meaning = TextEditingController();
+  /// This TextEditingController stores informatio for the search TextFiels when the user searches something.
+  late final TextEditingController searchController = TextEditingController();
 
   // WIDGETS
 
@@ -48,6 +55,39 @@ class _EditDeckPageState extends State<EditDeckPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.deckName),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    hintText: "Search"
+                  ),
+                )
+              ),
+              IconButton(
+                onPressed: () {
+                  final searchInput = searchController.text;
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchResults(
+                        searchInput: searchInput,
+                        decks: widget.decks,
+                        deckNames: widget.deckNames,
+                        myDictionary: widget.myDictionary,
+                      )
+                    )
+                  );
+                },
+                icon: Icon(Icons.search_rounded)
+              )
+            ],
+          )
+        )
       ),
 
       /// Simple logic check to see if we are rendering the My Dictionary deck or just a random custom deck.

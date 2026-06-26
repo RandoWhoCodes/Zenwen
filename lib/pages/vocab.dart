@@ -201,7 +201,9 @@ class _VocabState extends State<Vocab> {
                                 builder: (context) => EditDeckPage(
                                   // These are so that the page knows what data to show.
                                   deckName: "My Dictionary",
+                                  deckNames: deckNames,
                                   deck: decks["My Dictionary"],
+                                  decks: decks,
                                   myDictionary: decks["My Dictionary"]
                                 )
                               )
@@ -288,7 +290,9 @@ class _VocabState extends State<Vocab> {
                                                 // Gives the page the data to show.
                                                 // index + 1 to skip My Dictionary.
                                                 deckName: deckNames[index + 1],
+                                                deckNames: deckNames,
                                                 deck: decks[deckNames[index + 1]],
+                                                decks: decks,
                                                 myDictionary: decks["My Dictionary"]
                                               )
                                             )
