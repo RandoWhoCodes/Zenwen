@@ -15,6 +15,8 @@ It doesn't have much yet, but it works.
  - View all your vocab in 1 place
  - Search for decks or vocab in the search bar
 
+Since this is simply just a demo, nothing is saved and all data is temporary. Once you refresh the page everything will be reset.
+
 ---
 
 ### How it works
